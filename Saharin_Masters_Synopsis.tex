@@ -1,0 +1,147 @@
+\documentclass[a4paper,12pt,notitlepage]{article}
+
+
+\usepackage{graphicx,color}
+
+
+% DEFAULT SETTINGS
+%**************************************************************************************************
+\marginparwidth -20 true pt    % Width of marginal notes.
+\oddsidemargin  -10 true pt       % Note that \oddsidemargin=\evensidemargin
+\evensidemargin -10 true pt
+\topmargin -0.5 true in        % Nominal distance from top of page to top of
+\textheight 9.75 true in         % Height of text (including footnotes and figures)
+\textwidth 7 true in        % Width of text line.
+\parindent=0pt                  % Do not indent paragraphs
+\parskip= 1 ex
+\columnseprule = 0.1pt
+\footskip = 30 true pt
+\hoffset = -0.1 true in
+\voffset = -0.1 true in
+\abovedisplayskip 1 true pt
+\abovedisplayshortskip 1 true pt
+\topsep 0 true pt
+
+
+\begin{document}
+\pagestyle{plain}
+\title{\textbf{\huge{Multi-Instrument Ionospheric Faraday Rotation Analysis}\\
+\large{Michael Saharin}}}
+\maketitle
+
+\section{Introduction}
+
+A linearly polarized electromagnetic wave can be decomposed into the superposition of one right-handed circularly polarized wave and one left-handed circularly polarized wave. When this wave travels through a medium, it interacts with the particles in the medium which causes the left-handed and right-handed waves to travel at slightly different speeds. This difference creates a relative phase shift and therefore a rotation of the plane of polarization of the electromagnetic wave. This rotation effect is known as Faraday Rotation. \\
+
+The polarization of radiation emitted by astronomical sources can therefore be used to study the magneto-ionic material between us and the source. However, before reaching our instruments, the radiation passes through the ionosphere which causes further Faraday rotation. In quiet solar conditions, the maximum rotation measure is 1 or 2 radians/m$^2$, which induces a rotation of the plane of polarization by about 5 degrees at 20 cm. Therefore, to study the polarization of the radiation, we need to remove the effects of the ionospheric Faraday rotation. The difficulty with this, is that the ionospheric properties are always changing due to space weather conditions. So we need to find the link between the ionospheric properties and the effects of ionospheric Faraday rotation, so that if we measure the state of the ionosphere, we know how the polarization of the measured radiation is being distorted by it. A common indicator of ionospheric properties, which is relatively easily measured, is the total electron content (TEC). Ideally, we need to determine the relationship between the TEC and the ionospheric Faraday rotation. 
+
+\section{Problem Statement}
+Radio interferometers are used for polarimetric imaging and this is one of the types of studies that will be done at the Southern African MeerKAT telescope and in turn, the Square Kilometre Array (SKA) telescope. However, the polarization of the radiation that is measured is altered due to ionospheric Faraday rotation. We therefore need to remove the effects of this Faraday rotation. Unfortunately, this is made difficult by the variability of the ionosphere due to space weather. Therefore, the relationship between the TEC and the ionospheric Faraday rotation needs to be determined.
+
+O'Sullivan et al. (2012) used the Australian Telescope Compact Array (ATCA) to demonstrate that it is possible to spectrally resolve the polarization structure of radio sources that are spatially unresolved. They identified two AGN (PKS B1610-771 and PKS B1039-47) that required multiple rotation measure (RM) components to determine the Faraday depth structure of the source, and suggest that the additional components are due to the inner jet regions. They find that modelling the polarization angle and the degree of polarization dependences with wavelength squared is vital in measuring the true Faraday depth structure of extragalactic radio sources. This project aims to extend the methods used by O'Sullivan et al. (2012), and potentially other methods, to extract Faraday rotation parameters from existing KAT-7 data and to link these parameters to the change in TEC of the ionosphere over the SKA site in the Karoo.
+
+
+\section{Research Goal}
+
+\subsection{Aim}
+
+\begin{itemize}
+\item To study and understand polarimetric imaging using radio interferometers
+\item To study and understand ionospheric Faraday rotation
+\item To study the existing calibration process and how it addresses, if at all, Faraday rotation
+\item To determine the relationship between the TEC and ionospheric Faraday rotation in order to remove these rotation effects from polarimetric data.
+\end{itemize}
+
+\subsection{Objectives}
+
+\begin{itemize}
+\item To investigate the CASA calibration procedure used for KAT-7
+\item To extend the methods used by O'Sullivan et al. (2012), and other potential methods, to model ionospheric Faraday Rotation
+\item To extract Faraday rotation parameters from existing KAT-7 data and to link these parameters to the change in TEC of the ionosphere over the SKA site in the Karoo. 
+\end{itemize}
+
+\section{Method}
+
+\begin{itemize}
+\item O'Sullivan et al. (2012) modelled the Faraday rotation due to several different rotation measure (RM) components. These different components represent the different magneto-ionic materials in the space between the extragalactic source and Earth. If the ionosphere is then also taken into account, it is the only component that varies on very small time scales. Therefore, a possible method would be to apply such a model to the measured visibilities and to allow only one component to vary with time. This component would represent the ionosphere.
+
+\item As shown in Cotton (1999), the mathematics behind the calibration procedure involves the following equation:
+\begin{equation}
+v = (J_i \otimes J_k ^*)Ss ,
+\end{equation}
+where $J_i$ is the product of all Jones matrices for antenna $i$, $\otimes$ is the Kronecker product, s is the true Stokes visibility vector and S is the matrix that transforms this vector into the four correlations. $J_i$ can be written as:
+\begin{equation}
+J_i =G_i D_i R_i P_i
+\end{equation}
+where
+\begin{equation}
+G_i = \left[ \begin{array}{cc}
+			g_{ip} & 0 \\
+			0 & g_{iq} \end{array} \right];
+D_i= \left[ \begin{array}{cc}
+			1 & d_{ip} \\
+			-d_{iq} & 1 \end{array} \right];
+R_i= \left[ \begin{array}{cc}
+			cosx & sinx \\
+			-sinx & cosx \end{array} \right];
+P_i= \left[ \begin{array}{cc}
+			cos\theta & sin\theta \\
+			-sin\theta & cos\theta \end{array} \right]
+\end{equation}
+and $p$ and $q$ represent the two feeds. $R_i$ represents the ionospheric Faraday Rotation of the electric vector over an angle x.\\
+
+Another possible method for this project is to attempt to solve for $R_i$ explicitly.
+
+\item Cross-matching the $\Delta TEC$ with GPS data available from the South African National Space Agency (SANSA).
+
+\item Other possible methods or models may arise from this study.
+\end{itemize}
+
+\section{Chapter Division}
+
+\subsection{Chapter 1: Introduction}
+
+This chapter introduces the main topics discussed in the dissertation, including polarimetry, Faraday rotation, radio interferometry and calibration, etc. The main aims and objectives will be discussed here, as well as some pre-existing methods and results on the topic. 
+
+\subsection{Chapter 2: Data Selection and Observations}
+
+An overview of the data sample as well as various data mining and preprocessing
+procedures will be discussed in this chapter.
+
+\subsection{Chapter 3: Analysis}
+
+The tools used will be discussed in this chapter as well as the methodology carried
+out to analyse the data.
+
+\subsection{Chapter 4: Results and Discussion}
+
+Results obtained from the analysis carried out on the data will be presented in this
+chapter and the various topics that we want to address as stated in Section 2 will be
+discussed here.
+
+\subsection{Chapter 5: Summary, Conclusion and Future Work}
+
+A summary of the dissertation will be discussed here together with all the findings
+from the analysis performed. Suggestions for future work will also be
+addressed.
+
+\subsection{Chapter 6: References}
+
+\section{References}
+
+Hayden, D. (2013), Informal report on work done during internship at SKA between July 15th - September 14th 2013. Report. Cape Town, SKA.\\
+
+J.F. Helmboldt, T.J.W Lazio, H.T. Intema, and K.F. Dymond (2012), High-precision measurements of ionospheric TEC gradients with the Very Large Array VHF system, \textit{Radio Science: An AGU Journal}, [Online] 47(6), Available at: http://doi.wiley.com/10.1029/2011RS004883 [Accessed 14 July, 2016]. \\
+
+O'Sullivan, S.P. et al. (2012), Complex Faraday depth structure of Active Galactic Nuclei as revealed by broadband radio polarimetry, \textit{MNRAS}, [Online] 421(4), Available at:\\ http://mnras.oxfordjournals.org/content/421/4/3300 [Accessed 14 July, 2016]. \\
+
+Cotton, W (1999), Polarization in Interferometry, \textit{ASP Conference Series}, Vol 180.\\
+
+Perley et al. (2013), Integrated Polarization Properties of 3C48, 3C138, 3C147, and 3C286, \textit{Astrophysical Journal Supplement Series}, [Online] 206(2), Available at:\\
+http://iopscience.iop.org/article/10.1088/0067-0049/206/2/16/meta;jsessionid=999D9EDE1F6666\\
+40513A38CE2558F14D.c1.iopscience.cld.iop.org.\\
+
+Sotomayor-Beltran et al. (2013), Calibrating high-precision Faraday rotation measurements for LOFAR and the next generation of low-frequency radio telescopes, \textit{Astronomy and Astrophysics}, [Online] 552, Article number A58, Available at: http://www.aanda.org/articles/aa/abs/2013/04/aa20728-12/aa20728-12.html.
+
+\end{document}
+
